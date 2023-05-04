@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+
+}
+
+body {
+    min-height: 100vh;
+    background-color: hsl(0,0%,0%);
+    color: white;
+
+}
+
+header {
+    padding: 1rem;
+    /* display: flex;
+    justify-content: center; */
+    border-bottom: solid 2px black;
+    /* position: sticky;
+    top: 0; */
+    z-index: 10;
+    background-color: hsl(0,0%,20%);
+    color: white;
+}
+
+#gallery {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-columns: auto;
+    padding: 1rem;
+    align-items: center;
+}
+
+.thumb {
+    padding: 0;
+}
