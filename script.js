@@ -2,6 +2,9 @@ const COUNT = 30
 
 function getToken() {
     const tokenField = document.getElementById("token")
+    if (window.location.hash) {
+        tokenField.value = window.location.hash.substring(1)
+    }
     return tokenField.value
 }
 
@@ -10,7 +13,6 @@ function getQuery() {
     return searchField.value
 }
 function getUrl(token, query, orientation) {
-
     if (query) {
         return `https://api.unsplash.com/search/photos/?client_id=${token}&query=${query}&orientation=${orientation}&per_page=${COUNT}`
     } else {
@@ -38,28 +40,37 @@ function updateGallery(photos) {
         gallery.appendChild(thumb)
     });
 }
-document.getElementById("ieskoti").addEventListener("click",
-    async () => {
 
-        const token = getToken()
-        if (!token) {
-            console.warn("Token is not set")
-            return
-        }
-        const query = getQuery()
-        const orientation = document.getElementById("portrait").checked ? "portrait" : "landscape"
+const getData = async () => {
+    const token = getToken()
+    if (!token) {
+        console.warn("Token is not set")
+        return
+    }
+    const query = getQuery()
+    const orientation = document.getElementById("portrait").checked ? "portrait" : "landscape"
 
-        // console.log(getUrl(token, query, orientation))
+    // console.log(getUrl(token, query, orientation))
 
-        let results = await getContent(getUrl(token, query, orientation))
-        let photos = null
-        if (results instanceof Array) {
-            photos = results
-        } else {
-            photos = results.results
-        }
+    let results = await getContent(getUrl(token, query, orientation))
+    let photos = null
+    if (results instanceof Array) {
+        photos = results
+    } else {
+        photos = results.results
+    }
+    return photos
+    // console.log(photos)
+}
 
-        // console.log(photos)
-        updateGallery(photos)
+async function showContent() {
+    const photos = await getData()
+    updateGallery(photos)
+}
 
-    })
+document.getElementById("ieskoti").addEventListener("click", showContent)
+document.getElementById("search").addEventListener("keyup", e => {
+    if (e.key == "Enter") showContent()
+})
+
+showContent()
