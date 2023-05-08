@@ -4,7 +4,7 @@
 
 body {
     min-height: 100vh;
-    background-color: hsl(0,0%,0%);
+    background-color: hsl(0, 0%, 0%);
     color: white;
 
 }
@@ -13,7 +13,7 @@ header {
     padding: 1rem;
     border-bottom: solid 2px black;
     z-index: 10;
-    background-color: hsl(0,0%,20%);
+    background-color: hsl(0, 0%, 20%);
     color: white;
 }
 
@@ -30,6 +30,11 @@ header {
     padding: 0;
 }
 
-#nustatymai{
+.img-thumbnail:hover {
+    scale: 1.1;
+    background-color: orangered;
+}
+
+#nustatymai {
     padding: 1rem;
 }
